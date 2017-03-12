@@ -55,7 +55,8 @@ class SiteNavigator {
     }
 
     private void retrieveBookIdFromUrl() {
-        String bookUrlWithId = driver.findElement(By.xpath("//*[@id=\"deal-of-the-day\"]/div/div/div[2]/div[5]/div[2]/a"))
+//        String bookUrlWithId = driver.findElement(By.xpath("//*[@id=\"deal-of-the-day\"]/div/div/div[2]/div[5]/div[2]/a"))
+        String bookUrlWithId = driver.findElement(By.xpath("//a[contains(@class, 'twelve-days-claim' )]"))
                 .getAttribute("href");
         bookUrlWithId.getChars(44,49, bookIdFromUrl,0);
     }
@@ -65,12 +66,11 @@ class SiteNavigator {
     }
 
     private void clickButtonToGetFreeBook() {
-        driver.findElement(By.xpath("//*[@id=\"deal-of-the-day\"]/div/div/div[2]/div[5]/div[2]/a/div/input")).click();
-
+        driver.findElement(By.xpath("//div[contains(@class, 'book-claim-token-inner' )]")).click();
     }
 
     private void clickBookAfterLocalizeItsByTitle() {
-        driver.findElement(By.xpath("//div[contains(text(), '" +bookTitle+ "')]")).click();
+        driver.findElement(By.xpath("//div[contains(text(), '" +bookTitle+ "' )]")).click();
     }
 
     String getBookTitle() {

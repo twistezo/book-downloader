@@ -45,10 +45,10 @@ class BookDownloader {
         app.downloadEPUB();
         app.waitFor(10000);
         lastModified = app.getLastModifiedFile(filePath);
-        LOG.info("PDF file name before: " + lastModified);
+        LOG.info("EPUB file name before: " + lastModified);
         app.renameDownloadedFile(lastModified, siteNavigator.getBookTitle(), "epub");
         lastModified = app.getLastModifiedFile(filePath);
-        LOG.info("PDF file name after: " + lastModified);
+        LOG.info("EPUB file name after: " + lastModified);
 
         app.setEnd();
     }
