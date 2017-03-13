@@ -18,6 +18,7 @@ class BookDownloader {
     private static WebDriver driver;
     private static final Logger LOG = LogManager.getLogger(BookDownloader.class);
     private static String filePath;
+    private static SiteNavigator siteNavigator;
 
     private BookDownloader() {  }
 
@@ -27,7 +28,7 @@ class BookDownloader {
         settings.setUp();
         driver = settings.getDriver();
         BookDownloader app = new BookDownloader();
-        com.twistezo.SiteNavigator siteNavigator = com.twistezo.SiteNavigator.getInstance();
+        siteNavigator = com.twistezo.SiteNavigator.getInstance();
 
         if(!app.checkFileExists(siteNavigator.getBookTitle(), "pdf")){
             app.downloadPDF();
@@ -61,11 +62,11 @@ class BookDownloader {
     }
 
     private void downloadPDF() {
-        driver.findElement(By.xpath("//*[@id=\"product-account-list\"]/div[1]/div[2]/div[2]/a[1]")).click();
+        driver.findElement(By.xpath("//a[contains(@href, '"+siteNavigator.getBookId()+"/pdf' )]")).click();
     }
 
     private void downloadEPUB() {
-        driver.findElement(By.xpath("//*[@id=\"product-account-list\"]/div[1]/div[2]/div[2]/a[2]")).click();
+        driver.findElement(By.xpath("//a[contains(@href, '"+siteNavigator.getBookId()+"/epub' )]")).click();
     }
 
     private void waitFor(long ms) {

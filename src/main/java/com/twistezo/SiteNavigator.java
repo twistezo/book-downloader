@@ -18,6 +18,7 @@ class SiteNavigator {
     private static Actions builder = settings.getBuilder();
     private static SiteNavigator instance = null;
     private char[] bookIdFromUrl = new char[5];
+    private String bookId;
     private String bookTitle;
 
     private SiteNavigator() { }
@@ -55,10 +56,10 @@ class SiteNavigator {
     }
 
     private void retrieveBookIdFromUrl() {
-//        String bookUrlWithId = driver.findElement(By.xpath("//*[@id=\"deal-of-the-day\"]/div/div/div[2]/div[5]/div[2]/a"))
         String bookUrlWithId = driver.findElement(By.xpath("//a[contains(@class, 'twelve-days-claim' )]"))
                 .getAttribute("href");
         bookUrlWithId.getChars(44,49, bookIdFromUrl,0);
+        bookId = String.valueOf(bookIdFromUrl);
     }
 
     private void retrieveBookTitle() {
@@ -75,5 +76,9 @@ class SiteNavigator {
 
     String getBookTitle() {
         return bookTitle;
+    }
+
+    public String getBookId() {
+        return bookId;
     }
 }
