@@ -3,6 +3,7 @@ package com.twistezo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,13 +32,21 @@ class SiteNavigator {
     }
 
     {
+        LOG.info("Start navigation on page.");
         goToUrl();
+        LOG.info("...goToUrl complete.");
         clickButtonToGetFreeBook();
-        logInToSite(settings.getLOGIN(), settings.getPASSWORD());
+        LOG.info("...clickButtonToGetFreeBook complete.");
+        logInToSite(settings.getLogin(), settings.getPass());
+        LOG.info("...logInToSite complete.");
         retrieveBookIdFromUrl();
+        LOG.info("...retrieveBookIdFromUrl complete.");
         retrieveBookTitle();
+        LOG.info("...retrieveBookTitle complete.");
         clickButtonToGetFreeBook();
+        LOG.info("...clickButtonToGetFreeBook complete.");
         clickBookAfterLocalizeItsByTitle();
+        LOG.info("...clickBookAfterLocalizeItsByTitle complete.");
         LOG.info("Navigation on page complete.");
     }
 
@@ -67,6 +76,11 @@ class SiteNavigator {
     }
 
     private void clickButtonToGetFreeBook() {
+        waitFor(1000);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ESCAPE);
+        action.perform();
+        waitFor(1000);
         driver.findElement(By.xpath("//div[contains(@class, 'book-claim-token-inner' )]")).click();
     }
 
@@ -80,5 +94,13 @@ class SiteNavigator {
 
     public String getBookId() {
         return bookId;
+    }
+
+    private void waitFor(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

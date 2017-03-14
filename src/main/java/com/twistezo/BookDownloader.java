@@ -16,19 +16,28 @@ import java.nio.file.Paths;
 
 class BookDownloader {
     private static WebDriver driver;
+    private static BookDownloader instance = null;
     private static final Logger LOG = LogManager.getLogger(BookDownloader.class);
     private static String filePath;
     private static SiteNavigator siteNavigator;
+    private static boolean run;
 
     private BookDownloader() {  }
 
-    public static void main(String[] args) {
-        com.twistezo.Settings settings = com.twistezo.Settings.getInstance();
-        filePath = settings.getDOWNLOAD_FOLDER();
+    static BookDownloader getInstance() {
+        if(instance == null) {
+            instance = new BookDownloader();
+        }
+        return instance;
+    }
+
+    public void startDownload() {
+        Settings settings = Settings.getInstance();
+        filePath = settings.getDownloadFolder();
         settings.setUp();
         driver = settings.getDriver();
         BookDownloader app = new BookDownloader();
-        siteNavigator = com.twistezo.SiteNavigator.getInstance();
+        siteNavigator = SiteNavigator.getInstance();
 
         if(!app.checkFileExists(siteNavigator.getBookTitle(), "pdf")){
             app.downloadPDF();

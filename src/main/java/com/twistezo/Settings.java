@@ -22,9 +22,9 @@ class Settings {
     private final String DRIVER_FILE_PATH = "src/main/resources/chromedriver.exe";
     private final String DRIVER_NAME = "webdriver.chrome.driver";
     private final String PAGE_URL = "https://www.packtpub.com/packt/offers/free-learning";
-    private final String LOGIN = "luk89@outlook.com";
-    private final String PASSWORD = "twistezo";
-    private final String DOWNLOAD_FOLDER = "C:\\Users\\luk89\\Desktop\\Java\\Książki";
+    private String login = ""; // = "luk89@outlook.com";
+    private String pass = ""; // = "twistezo";
+    private String downloadFolder = ""; // = "C:\\Users\\luk89\\Desktop\\Java\\Książki";
     private WebDriver driver;
     private Actions builder;
 
@@ -42,7 +42,7 @@ class Settings {
         System.setProperty(DRIVER_NAME, file.getAbsolutePath());
         HashMap<String, Object> chromeOptions = new HashMap<>();
         chromeOptions.put("profile.default_content_settings.popups", 0);
-        chromeOptions.put("download.default_directory", DOWNLOAD_FOLDER);
+        chromeOptions.put("download.default_directory", downloadFolder);
         chromeOptions.put("download.prompt_for_download", false);
         chromeOptions.put("--no-startup-window", true);
         ChromeOptions options = new ChromeOptions();
@@ -67,16 +67,27 @@ class Settings {
         return PAGE_URL;
     }
 
-    String getLOGIN() {
-        return LOGIN;
+    String getLogin() {
+        return login;
     }
 
-    String getPASSWORD() {
-        return PASSWORD;
+    String getPass() {
+        return pass;
     }
 
-    String getDOWNLOAD_FOLDER() {
-        return DOWNLOAD_FOLDER;
+    String getDownloadFolder() {
+        return downloadFolder;
     }
 
+    void setLogin(String login) {
+        this.login = login;
+    }
+
+    void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    void setDownloadFolder(String downloadFolder) {
+        this.downloadFolder = downloadFolder;
+    }
 }
