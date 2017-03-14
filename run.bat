@@ -1,1 +1,1 @@
-java -cp book-downloader-1.0-SNAPSHOT-jar-with-dependencies.jar com.twistezo.Gui
+mvn jfx:jar && cd target\jfx\app\ && start book-downloader-1.0-SNAPSHOT-jfx.jar

@@ -21,6 +21,7 @@ class BookDownloader {
     private static String filePath;
     private static SiteNavigator siteNavigator;
     private static boolean run;
+    private Settings settings;
 
     private BookDownloader() {  }
 
@@ -32,8 +33,9 @@ class BookDownloader {
     }
 
     public void startDownload() {
-        Settings settings = Settings.getInstance();
+        settings = Settings.getInstance();
         filePath = settings.getDownloadFolder();
+        settings.unpackExeFromJar();
         settings.setUp();
         driver = settings.getDriver();
         BookDownloader app = new BookDownloader();
@@ -66,6 +68,7 @@ class BookDownloader {
     private void setEnd() {
         driver.close();
         LOG.warn("Shutdown app after 5 seconds.");
+        settings.deleteTempExe();
         waitFor(5000);
         System.exit(0);
     }

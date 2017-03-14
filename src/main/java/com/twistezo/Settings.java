@@ -9,7 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.File;
+import java.io.*;
 import java.util.HashMap;
 
 /**
@@ -19,7 +19,7 @@ import java.util.HashMap;
 class Settings {
     private static Settings instance = null;
     private static final Logger LOG = LogManager.getLogger(Settings.class);
-    private final String DRIVER_FILE_PATH = "src/main/resources/chromedriver.exe";
+    private final String DRIVER_FILE_PATH = "chromedriver.exe";
     private final String DRIVER_NAME = "webdriver.chrome.driver";
     private final String PAGE_URL = "https://www.packtpub.com/packt/offers/free-learning";
     private String login = ""; // = "luk89@outlook.com";
@@ -35,6 +35,35 @@ class Settings {
             instance = new Settings();
         }
         return instance;
+    }
+
+    public void unpackExeFromJar() {
+        InputStream is = null;
+        try {
+            is = getClass().getResource("/chromedriver.exe").openStream();
+            OutputStream os = new FileOutputStream("chromedriver.exe");
+            LOG.info("Create temporary file chromedriver.exe");
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+            is.close();
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTempExe() {
+        File file = new File("chromedriver.exe");
+        file.delete();
+        if(file.exists()){
+            LOG.warn("Delete failed.");
+        } else {
+            LOG.info("Temp file deleted.");
+        }
+
     }
 
     public void setUp() {
