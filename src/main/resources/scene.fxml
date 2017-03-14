@@ -18,12 +18,12 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <TextField id="login" fx:id="login" layoutX="200.0" layoutY="108.0" prefHeight="25.0" prefWidth="259.0" promptText="login@example.com" text="luk89@outlook.com" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
+            <TextField id="login" fx:id="login" layoutX="200.0" layoutY="108.0" prefHeight="25.0" prefWidth="259.0" promptText="login@example.com" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField id="password" fx:id="password" layoutX="200.0" layoutY="147.0" prefHeight="25.0" prefWidth="259.0" promptText="password" text="twistezo" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
+            <TextField id="password" fx:id="password" layoutX="200.0" layoutY="147.0" prefHeight="25.0" prefWidth="259.0" promptText="password" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -40,7 +40,7 @@
             </Label>
             <Label alignment="CENTER" layoutX="76.0" layoutY="57.0" style="&#10;" text="Automatic tool for downloading book made with Selenium (Chrome driver)" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
             <Label alignment="CENTER" layoutX="443.0" layoutY="493.0" style="&#10;" text=" © twistezo, 2017" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-            <TextField id="downloadPath" fx:id="downloadPath" layoutX="200.0" layoutY="187.0" prefHeight="25.0" prefWidth="259.0" promptText="C:\Users\example\Desktop" text="C:\users\luk89\desktop" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="190.0">
+            <TextField id="downloadPath" fx:id="downloadPath" layoutX="200.0" layoutY="187.0" prefHeight="25.0" prefWidth="259.0" promptText="C:\Users\example\Desktop" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="190.0">
                <font>
                   <Font size="14.0" />
                </font>
