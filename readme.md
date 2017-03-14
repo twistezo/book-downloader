@@ -6,4 +6,4 @@ To run:
 
 `mvn clean compile assembly:single`
 
-`java -cp target/book-downloader-1.0-SNAPSHOT-jar-with-dependencies.jar com.twistezo.BookDownloader`
+`java -cp book-downloader-1.0-SNAPSHOT-jar-with-dependencies.jar com.twistezo.Gui`
