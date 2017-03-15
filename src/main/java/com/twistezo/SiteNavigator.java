@@ -34,24 +34,26 @@ class SiteNavigator {
     {
         LOG.info("Start navigation on page.");
         goToUrl();
-        LOG.info("...goToUrl complete.");
         clickButtonToGetFreeBook();
-        LOG.info("...clickButtonToGetFreeBook complete.");
         logInToSite(settings.getLogin(), settings.getPass());
-        LOG.info("...logInToSite complete.");
         retrieveBookIdFromUrl();
-        LOG.info("...retrieveBookIdFromUrl complete.");
         retrieveBookTitle();
-        LOG.info("...retrieveBookTitle complete.");
         clickButtonToGetFreeBook();
-        LOG.info("...clickButtonToGetFreeBook complete.");
         clickBookAfterLocalizeItsByTitle();
-        LOG.info("...clickBookAfterLocalizeItsByTitle complete.");
         LOG.info("Navigation on page complete.");
     }
 
     private void goToUrl() {
         driver.navigate().to(settings.getPAGE_URL());
+    }
+
+    private void clickButtonToGetFreeBook() {
+        waitFor(1000);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ESCAPE);
+        action.perform();
+        waitFor(1000);
+        driver.findElement(By.xpath("//div[contains(@class, 'book-claim-token-inner' )]")).click();
     }
 
     private void logInToSite(String login, String password) {
@@ -75,15 +77,6 @@ class SiteNavigator {
         bookTitle = driver.findElement(By.xpath("//*[@id=\"deal-of-the-day\"]/div/div/div[2]/div[2]/h2")).getText();
     }
 
-    private void clickButtonToGetFreeBook() {
-        waitFor(1000);
-        Actions action = new Actions(driver);
-        action.sendKeys(Keys.ESCAPE);
-        action.perform();
-        waitFor(1000);
-        driver.findElement(By.xpath("//div[contains(@class, 'book-claim-token-inner' )]")).click();
-    }
-
     private void clickBookAfterLocalizeItsByTitle() {
         driver.findElement(By.xpath("//div[contains(text(), '" +bookTitle+ "' )]")).click();
     }
@@ -92,7 +85,7 @@ class SiteNavigator {
         return bookTitle;
     }
 
-    public String getBookId() {
+    String getBookId() {
         return bookId;
     }
 

@@ -5,13 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @author twistezo (09.03.2017)
+ * Singleton
  */
 
 class BookDownloader {
@@ -20,8 +17,8 @@ class BookDownloader {
     private static final Logger LOG = LogManager.getLogger(BookDownloader.class);
     private static String filePath;
     private static SiteNavigator siteNavigator;
-    private static boolean run;
-    private Settings settings;
+    private Settings settings = Settings.getInstance();
+    private boolean flag = true;
 
     private BookDownloader() {  }
 
@@ -32,41 +29,40 @@ class BookDownloader {
         return instance;
     }
 
-    public void startDownload() {
-        settings = Settings.getInstance();
-        filePath = settings.getDownloadFolder();
-        settings.unpackExeFromJar();
-        settings.setUp();
-        driver = settings.getDriver();
-        BookDownloader app = new BookDownloader();
-        siteNavigator = SiteNavigator.getInstance();
-
-        if(!app.checkFileExists(siteNavigator.getBookTitle(), "pdf")){
-            app.downloadPDF();
-            app.waitFor(10000);
-        } else {
-            LOG.warn("PDF file already exists. It means that second file should also exists.");
-            app.setEnd();
+    void startDownload() {
+        while(flag) {
+            filePath = settings.getDownloadFolder();
+            settings.unpackExeFromJar();
+            settings.setUp();
+            driver = settings.getDriver();
+            siteNavigator = SiteNavigator.getInstance();
+            if (!checkFileExists(siteNavigator.getBookTitle(), "pdf")) {
+                downloadPDF();
+                waitFor(10000);
+            } else {
+                LOG.warn("PDF file already exists. It means that second file should also exists.");
+                setEnd();
+                break;
+            }
+            File lastModified = getLastModifiedFile(filePath);
+            LOG.info("PDF file name before: " + lastModified);
+            renameDownloadedFile(lastModified, siteNavigator.getBookTitle(), "pdf");
+            lastModified = getLastModifiedFile(filePath);
+            LOG.info("PDF file name after: " + lastModified);
+            downloadEPUB();
+            waitFor(10000);
+            lastModified = getLastModifiedFile(filePath);
+            LOG.info("EPUB file name before: " + lastModified);
+            renameDownloadedFile(lastModified, siteNavigator.getBookTitle(), "epub");
+            lastModified = getLastModifiedFile(filePath);
+            LOG.info("EPUB file name after: " + lastModified);
+            setEnd();
         }
-        File lastModified = app.getLastModifiedFile(filePath);
-        LOG.info("PDF file name before: " + lastModified);
-        app.renameDownloadedFile(lastModified, siteNavigator.getBookTitle(), "pdf");
-        lastModified = app.getLastModifiedFile(filePath);
-        LOG.info("PDF file name after: " + lastModified);
-        app.waitFor(10000);
-        app.downloadEPUB();
-        app.waitFor(10000);
-        lastModified = app.getLastModifiedFile(filePath);
-        LOG.info("EPUB file name before: " + lastModified);
-        app.renameDownloadedFile(lastModified, siteNavigator.getBookTitle(), "epub");
-        lastModified = app.getLastModifiedFile(filePath);
-        LOG.info("EPUB file name after: " + lastModified);
-
-        app.setEnd();
     }
 
     private void setEnd() {
         driver.close();
+        LOG.info("Tasks are completed.");
         LOG.warn("Shutdown app after 5 seconds.");
         settings.deleteTempExe();
         waitFor(5000);
@@ -83,30 +79,16 @@ class BookDownloader {
 
     private void waitFor(long ms) {
         try {
-            LOG.info("Wait for " +ms+ "ms");
+            LOG.info("Wait for " +ms/1000+ "s");
             Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private long countFilesInDir() {
-        long counter = 0;
-        try {
-            counter = Files.list(Paths.get(filePath)).count();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return counter;
-    }
-
     private File getLastModifiedFile(String dir) {
         File fl = new File(dir);
-        File[] files = fl.listFiles(new FileFilter() {
-            public boolean accept(File file) {
-                return file.isFile();
-            }
-        });
+        File[] files = fl.listFiles(File::isFile);
         long lastMod = Long.MIN_VALUE;
         File choice = null;
         for (File file : files) {
@@ -120,20 +102,15 @@ class BookDownloader {
 
     private void renameDownloadedFile(File old, String newName, String extension){
         File file = new File(filePath+ "\\" +newName+ "."+ extension);
-        if(file.exists())
-            System.out.println("Sorry this file already exist. There is nothing to do.");
-        else {
+        if(!file.exists())
             old.renameTo(file);
+        else {
+            System.out.println("Sorry this file already exist. There is nothing to do.");
         }
     }
 
     private boolean checkFileExists(String newName, String extension) {
         File file = new File(filePath+ "\\" +newName+ "."+ extension);
-        if(file.exists()) {
-            return true;
-        } else {
-            return false;
-        }
+        return file.exists();
     }
-
 }

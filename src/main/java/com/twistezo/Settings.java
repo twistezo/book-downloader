@@ -8,12 +8,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.io.*;
 import java.util.HashMap;
 
 /**
  * @author twistezo (09.03.2017)
+ * Singleton
  */
 
 class Settings {
@@ -22,9 +22,9 @@ class Settings {
     private final String DRIVER_FILE_PATH = "chromedriver.exe";
     private final String DRIVER_NAME = "webdriver.chrome.driver";
     private final String PAGE_URL = "https://www.packtpub.com/packt/offers/free-learning";
-    private String login = ""; // = "luk89@outlook.com";
-    private String pass = ""; // = "twistezo";
-    private String downloadFolder = ""; // = "C:\\Users\\luk89\\Desktop\\Java\\Książki";
+    private String login = "";
+    private String pass = "";
+    private String downloadFolder = "";
     private WebDriver driver;
     private Actions builder;
 
@@ -37,7 +37,7 @@ class Settings {
         return instance;
     }
 
-    public void unpackExeFromJar() {
+    void unpackExeFromJar() {
         InputStream is = null;
         try {
             is = getClass().getResource("/chromedriver.exe").openStream();
@@ -55,15 +55,15 @@ class Settings {
         }
     }
 
-    public void deleteTempExe() {
+    void deleteTempExe() {
+        LOG.info("here");
         File file = new File("chromedriver.exe");
-        file.delete();
         if(file.exists()){
-            LOG.warn("Delete failed.");
-        } else {
+            file.delete();
             LOG.info("Temp file deleted.");
+        } else {
+            LOG.warn("Delete failed.");
         }
-
     }
 
     public void setUp() {

@@ -1,12 +1,11 @@
 package com.twistezo;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
 
@@ -33,26 +32,10 @@ public class SceneController {
         settings.setLogin(login.getText());
         settings.setPass(password.getText());
         settings.setDownloadFolder(downloadPath.getText());
+
         new Thread(() -> {
-            BookDownloader bookDownloader = BookDownloader.getInstance();
-            bookDownloader.startDownload();
-        }).start();
-    }
-
-    public static class Console extends OutputStream {
-        private TextArea output;
-
-        public Console(TextArea ta) {
-            this.output = ta;
-        }
-
-        @Override
-        public void write(final int i) throws IOException {
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    output.appendText(String.valueOf((char) i));
-                }
-            });
-        }
+                BookDownloader bookDownloader = BookDownloader.getInstance();
+                bookDownloader.startDownload();
+            }).start();
     }
 }
