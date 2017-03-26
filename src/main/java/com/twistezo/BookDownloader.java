@@ -38,7 +38,7 @@ class BookDownloader {
             siteNavigator = SiteNavigator.getInstance();
             if (!checkFileExists(siteNavigator.getBookTitle(), "pdf")) {
                 downloadPDF();
-                waitFor(10000);
+                waitFor(20000);
             } else {
                 LOG.warn("PDF file already exists. It means that second file should also exists.");
                 setEnd();
@@ -50,7 +50,7 @@ class BookDownloader {
             lastModified = getLastModifiedFile(filePath);
             LOG.info("PDF file name after: " + lastModified);
             downloadEPUB();
-            waitFor(10000);
+            waitFor(20000);
             lastModified = getLastModifiedFile(filePath);
             LOG.info("EPUB file name before: " + lastModified);
             renameDownloadedFile(lastModified, siteNavigator.getBookTitle(), "epub");
