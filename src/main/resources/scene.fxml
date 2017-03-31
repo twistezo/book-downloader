@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="520.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.twistezo.SceneController">
+<VBox prefHeight="520.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.twistezo.SceneController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -18,7 +18,7 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <TextField id="login" fx:id="login" layoutX="200.0" layoutY="108.0" prefHeight="25.0" prefWidth="259.0" promptText="login@example.com" text="luk89@outlook.com" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
+            <TextField id="login" fx:id="login" layoutX="200.0" layoutY="108.0" prefHeight="25.0" prefWidth="259.0" promptText="login@example.com" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -40,7 +40,7 @@
             </Label>
             <Label alignment="CENTER" layoutX="76.0" layoutY="57.0" style="&#10;" text="Automatic tool for downloading book made with Selenium (Chrome driver)" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
             <Label alignment="CENTER" layoutX="443.0" layoutY="493.0" style="&#10;" text=" © twistezo, 2017" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-            <TextField id="downloadPath" fx:id="downloadPath" layoutX="200.0" layoutY="187.0" prefHeight="25.0" prefWidth="259.0" promptText="C:\Users\example\Desktop" text="C:\Users\luk89\Desktop\Java\Książki" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="190.0">
+            <TextField id="downloadPath" fx:id="downloadPath" layoutX="200.0" layoutY="187.0" prefHeight="25.0" prefWidth="259.0" promptText="C:\users\example\desktop" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="190.0">
                <font>
                   <Font size="14.0" />
                </font>
