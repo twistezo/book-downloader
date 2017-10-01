@@ -6,9 +6,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.util.Properties;
 
-/**
- * @author twistezo (31.03.2017)
- */
 class PropertiesManager {
     private static final Logger LOG = LogManager.getLogger(PropertiesManager.class);
     private static PropertiesManager instance = null;
@@ -20,10 +17,11 @@ class PropertiesManager {
     static final String PASSWORD = "password";
     static final String DOWNLOAD_PATH = "downloadPath";
 
-    private PropertiesManager() { }
+    private PropertiesManager() {
+    }
 
     static PropertiesManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new PropertiesManager();
         }
         return instance;

@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 
 /**
- * @author twistezo (09.03.2017)
  * Singleton
  */
 
@@ -20,17 +19,18 @@ class BookDownloader {
     private Settings settings = Settings.getInstance();
     private boolean flag = true;
 
-    private BookDownloader() {  }
+    private BookDownloader() {
+    }
 
     static BookDownloader getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new BookDownloader();
         }
         return instance;
     }
 
     void startDownload() {
-        while(flag) {
+        while (flag) {
             filePath = settings.getDownloadFolder();
             settings.unpackExeFromJar();
             settings.setUp();
@@ -70,16 +70,16 @@ class BookDownloader {
     }
 
     private void downloadPDF() {
-        driver.findElement(By.xpath("//a[contains(@href, '"+siteNavigator.getBookId()+"/pdf' )]")).click();
+        driver.findElement(By.xpath("//a[contains(@href, '" + siteNavigator.getBookId() + "/pdf' )]")).click();
     }
 
     private void downloadEPUB() {
-        driver.findElement(By.xpath("//a[contains(@href, '"+siteNavigator.getBookId()+"/epub' )]")).click();
+        driver.findElement(By.xpath("//a[contains(@href, '" + siteNavigator.getBookId() + "/epub' )]")).click();
     }
 
     private void waitFor(long ms) {
         try {
-            LOG.info("Wait for " +ms/1000+ "s");
+            LOG.info("Wait for " + ms / 1000 + "s");
             Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -100,9 +100,9 @@ class BookDownloader {
         return choice;
     }
 
-    private void renameDownloadedFile(File old, String newName, String extension){
-        File file = new File(filePath+ "\\" +newName+ "."+ extension);
-        if(!file.exists())
+    private void renameDownloadedFile(File old, String newName, String extension) {
+        File file = new File(filePath + "\\" + newName + "." + extension);
+        if (!file.exists())
             old.renameTo(file);
         else {
             System.out.println("Sorry this file already exist. There is nothing to do.");
@@ -110,7 +110,7 @@ class BookDownloader {
     }
 
     private boolean checkFileExists(String newName, String extension) {
-        File file = new File(filePath+ "\\" +newName+ "."+ extension);
+        File file = new File(filePath + "\\" + newName + "." + extension);
         return file.exists();
     }
 }

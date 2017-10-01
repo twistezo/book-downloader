@@ -12,7 +12,6 @@ import java.io.*;
 import java.util.HashMap;
 
 /**
- * @author twistezo (09.03.2017)
  * Singleton
  */
 
@@ -28,10 +27,11 @@ class Settings {
     private WebDriver driver;
     private Actions builder;
 
-    private Settings() { }
+    private Settings() {
+    }
 
     static Settings getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Settings();
         }
         return instance;
@@ -58,7 +58,7 @@ class Settings {
     void deleteTempExe() {
         LOG.info("here");
         File file = new File("chromedriver.exe");
-        if(file.exists()){
+        if (file.exists()) {
             file.delete();
             LOG.info("Temp file deleted.");
         } else {

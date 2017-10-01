@@ -12,18 +12,19 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Properties;
 
-
-/**
- * @author twistezo (13.03.2017)
- */
 public class SceneController {
     private static final Logger LOG = LogManager.getLogger(SceneController.class);
     private PropertiesManager propertiesManager = PropertiesManager.getInstance();
     private Properties properties = propertiesManager.getProperties();
-    @FXML private TextField login;
-    @FXML private TextField password;
-    @FXML private TextField downloadPath;
-    @FXML private TextArea stackField;
+
+    @FXML
+    private TextField login;
+    @FXML
+    private TextField password;
+    @FXML
+    private TextField downloadPath;
+    @FXML
+    private TextArea stackField;
 
     @FXML
     private void initialize() {
@@ -43,9 +44,9 @@ public class SceneController {
         settings.setDownloadFolder(downloadPath.getText());
         updatePropertiesFromUserInput();
         new Thread(() -> {
-                BookDownloader bookDownloader = BookDownloader.getInstance();
-                bookDownloader.startDownload();
-            }).start();
+            BookDownloader bookDownloader = BookDownloader.getInstance();
+            bookDownloader.startDownload();
+        }).start();
     }
 
     private void afterStart() {

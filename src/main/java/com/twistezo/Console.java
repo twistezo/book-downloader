@@ -5,9 +5,6 @@ import javafx.scene.control.TextArea;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author twistezo (15.03.2017)
- */
 public class Console extends OutputStream {
     private TextArea output;
 

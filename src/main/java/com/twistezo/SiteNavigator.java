@@ -8,10 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-/**
- * @author twistezo (09.03.2017)
- */
-
 class SiteNavigator {
     private static Settings settings = Settings.getInstance();
     private static final Logger LOG = LogManager.getLogger(SiteNavigator.class);
@@ -22,10 +18,11 @@ class SiteNavigator {
     private String bookId;
     private String bookTitle;
 
-    private SiteNavigator() { }
+    private SiteNavigator() {
+    }
 
     static SiteNavigator getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new SiteNavigator();
         }
         return instance;
@@ -69,7 +66,7 @@ class SiteNavigator {
     private void retrieveBookIdFromUrl() {
         String bookUrlWithId = driver.findElement(By.xpath("//a[contains(@class, 'twelve-days-claim' )]"))
                 .getAttribute("href");
-        bookUrlWithId.getChars(44,49, bookIdFromUrl,0);
+        bookUrlWithId.getChars(44, 49, bookIdFromUrl, 0);
         bookId = String.valueOf(bookIdFromUrl);
     }
 
@@ -78,7 +75,7 @@ class SiteNavigator {
     }
 
     private void clickBookAfterLocalizeItsByTitle() {
-        driver.findElement(By.xpath("//div[contains(text(), '" +bookTitle+ "' )]")).click();
+        driver.findElement(By.xpath("//div[contains(text(), '" + bookTitle + "' )]")).click();
     }
 
     String getBookTitle() {

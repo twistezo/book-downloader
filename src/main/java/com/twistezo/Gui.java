@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * @author twistezo (13.03.2017)
- */
 public class Gui extends Application {
 
     @Override
@@ -23,5 +20,4 @@ public class Gui extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
